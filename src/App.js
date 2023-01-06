@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Phaser from 'phaser'
+import { IonPhaser } from '@ion-phaser/react'
+import GameScene from './GameScene'
+import PreloadScene from './PreloadScene'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    initialize: true,
+    game: {
+      width: 800,
+      height: 600,
+      type: Phaser.AUTO,
+      physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+      },
+      scene: [PreloadScene, GameScene],
+    }
+  }
+
+  render() {
+    const { initialize, game } = this.state
+    return (
+      <>
+        <h1>hello</h1>
+        <IonPhaser game={game} initialize={initialize} />
+      </>
+    )
+  }
 }
 
 export default App;
